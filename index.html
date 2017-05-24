@@ -9,6 +9,7 @@
 		</style>
 	</head>
 	<body>
+
 	<canvas id="myCanvas"></canvas>
 		<script src="js/three.js"></script>
 		<script>
@@ -35,8 +36,8 @@
 			var light1 = new THREE.PointLight(0xffffff, 0.5);
 			scene.add(light1);
 		//MATERIAL
-			var material = new THREE.MeshLambertMaterial({color: 0xF3FFE2, wireframe: true});
-			//var material = new THREE.MeshPhongMaterial({color: 0xF3FFE2});
+			//var material = new THREE.MeshLambertMaterial({color: 0xF3FFE2, wireframe: true});
+			var material = new THREE.MeshPhongMaterial({color: 0xF3FFE2});
 	
 		//GEOMETRY
 			//make 3d object
@@ -51,12 +52,12 @@
 			//var geometry = new THREE.TorusGeometry(100, 30, 16, 100);
 			//var geometry = new THREE.TorusKnotGeometry(100, 30, 16, 100);
 
-			var geometry = new THREE.BoxGeometry(300, 100, 100);
-			var mesh = new THREE.Mesh(geometry, material);
-			mesh.position.z = -1000;
-			mesh.position.x = -300;
-			mesh.position.y = 80;
-			scene.add(mesh);
+			var geoBay = new THREE.BoxGeometry(300, 100, 100);
+			var meshBay = new THREE.Mesh(geoBay, material);
+			meshBay.position.z = -1000;
+			meshBay.position.x = -300;
+			meshBay.position.y = 80;
+			scene.add(meshBay);
 
 			var geoCabin = new THREE.BoxGeometry(70, 70, 70);
 			var meshCabin = new THREE.Mesh(geoCabin, material);
@@ -64,13 +65,6 @@
 			meshCabin.position.x = -115;
 			meshCabin.position.y = 65;
 			scene.add(meshCabin);
-
-
-			// var geometry2 = new THREE.SphereGeometry(50, 10, 20);
-			// var meshWheelBL = new THREE.Mesh(geometry2, material);
-			// meshWheelBL.position.z = -1000;
-			// meshWheelBL.position.x = 100;
-			// scene.add(meshWheelBL);
 
 			var geoWheelBL = new THREE.CylinderGeometry(50, 50, 20, 16);
 			var meshWheelBL = new THREE.Mesh(geoWheelBL, material);
@@ -108,7 +102,7 @@
 
 
 			var render = function () {
-				mesh.position.x += 2;
+				meshBay.position.x += 2;
 				meshCabin.position.x += 2;
 				
 				meshWheelBL.rotation.y += .03;
@@ -126,6 +120,12 @@
 				renderer.render(scene, camera);
 				requestAnimationFrame(render);
 			};
+
+			document.addEventListener("keypress", function(event) {
+				if (event.keyCode == 39) {
+					console.log("hey!");
+				}
+			});
 
 			render();
 
