@@ -32,8 +32,8 @@
 			var light1 = new THREE.PointLight(0xffffff, 0.5);
 			scene.add(light1);
 		//MATERIAL
-			// var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-			var material = new THREE.MeshLambertMaterial({color: 0xF3FFE2, wireframe: true});
+			//var material = new THREE.MeshLambertMaterial({color: 0xF3FFE2, wireframe: true});
+			var material = new THREE.MeshPhongMaterial({color: 0xF3FFE2});
 	
 		//GEOMETRY
 			//make 3d object
@@ -48,29 +48,58 @@
 			//var geometry = new THREE.TorusGeometry(100, 30, 16, 100);
 			//var geometry = new THREE.TorusKnotGeometry(100, 30, 16, 100);
 
-			var geometry = new THREE.BoxGeometry(100, 100, 100);
+			var geometry = new THREE.BoxGeometry(300, 100, 100);
 			var mesh = new THREE.Mesh(geometry, material);
 			mesh.position.z = -1000;
-			mesh.position.x = -100;
+			mesh.position.x = -300;
+			mesh.position.y = 100;
 			scene.add(mesh);
 
-			var geometry2 = new THREE.SphereGeometry(50, 20, 20);
+			var geometry5 = new THREE.BoxGeometry(70, 70, 70);
+			var mesh5 = new THREE.Mesh(geometry5, material);
+			mesh5.position.z = -1000;
+			mesh5.position.x = -115;
+			mesh5.position.y = 85;
+			scene.add(mesh5);
+
+
+			// var geometry2 = new THREE.SphereGeometry(50, 10, 20);
+			// var mesh2 = new THREE.Mesh(geometry2, material);
+			// mesh2.position.z = -1000;
+			// mesh2.position.x = 100;
+			// scene.add(mesh2);
+
+			var geometry2 = new THREE.CylinderGeometry(50, 50, 20, 16);
 			var mesh2 = new THREE.Mesh(geometry2, material);
 			mesh2.position.z = -1000;
-			mesh2.position.x = 100;
+			mesh2.position.x = -400;
+			mesh2.rotation.x = 80;
 			scene.add(mesh2);
 
-			var geometry3 = new THREE.PlaneGeometry(10000, 10000, 100, 100);
+
+			var geometry3 = new THREE.CylinderGeometry(50, 50, 20, 32);
 			var mesh3 = new THREE.Mesh(geometry3, material);
-			mesh3.rotation.x = -90 * Math.PI / 180;
-			mesh3.position.y = -100;
+			mesh3.position.z = -1000;
+			mesh3.position.x = -200;
+			mesh3.rotation.x = 80;
 			scene.add(mesh3);
+
+			var geometry4 = new THREE.PlaneGeometry(10000, 10000, 100, 100);
+			var mesh4 = new THREE.Mesh(geometry4, material);
+			mesh4.rotation.x = -90 * Math.PI / 180;
+			mesh4.position.y = -100;
+			scene.add(mesh4);
 
 
 			var render = function () {
-		
-				mesh.rotation.x += .03;
-				mesh.rotation.y += .03;
+				mesh.position.x += 2;
+				//mesh2.rotation.x += .0
+				mesh2.rotation.y += .03;
+				mesh2.position.x += 2;
+				mesh3.rotation.y += .03;
+				//mesh3.rotation.x += .03;
+				mesh3.position.x += 2;
+				mesh5.position.x += 2;
 
 				renderer.render(scene, camera);
 				requestAnimationFrame(render);
