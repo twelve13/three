@@ -12,53 +12,63 @@
 	<canvas id="myCanvas"></canvas>
 		<script src="js/three.js"></script>
 		<script>
-
+		//RENDERER
 			//renderer draws everything onto canvas element.  WebGL is go-to renderer for three.js
 			var renderer = new THREE.WebGLRenderer({canvas: document.getElementById("myCanvas"), antialias: true});
 			renderer.setClearColor(0xff00c3);
 			renderer.setPixelRatio(window.devicePixelRatio);
 			renderer.setSize( window.innerWidth, window.innerHeight );
-		
+		//CAMERA
 			//there are diff kinds of cameras.  perspective camera: things in the distance look smaller.  params: field of view, aspect ratio of width over height, clipping: things too close/far will no longer render
 			var camera = new THREE.PerspectiveCamera( 35, window.innerWidth/window.innerHeight, 0.1, 3000 );
-			
+		//SCENE	
 			//container for whole world
 			var scene = new THREE.Scene();
-			
+		//LIGHTS	
 			//add light that covers entire space.  params: color, intensity
 			var light = new THREE.AmbientLight(0xffffff, 0.5);
 			scene.add(light);
 			//add point light that works from specific point in scene, color, half intensity
 			var light1 = new THREE.PointLight(0xffffff, 0.5);
 			scene.add(light1);
-
-
+		//MATERIAL
+			// var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+			var material = new THREE.MeshLambertMaterial({color: 0xF3FFE2, wireframe: true});
+	
+		//GEOMETRY
 			//make 3d object
 			//CubeGeometry and BoxGeometry do the same thing.  x, y, z params
-			var geometry = new THREE.CubeGeometry( 100, 100, 100 );
-			// var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-			var material = new THREE.MeshLambertMaterial({color: 0xF3FFE2});
-			// var cube = new THREE.Mesh( geometry, material );
+			//var geometry = new THREE.SphereGeometry(50, 10, 10);
+			//var geometry = new THREE.PlaneGeometry
+			//var geometry = new THREE.BoxGeometry
+			//var geometry = new THREE.CircleGeometry
+			//var geometry = new THREE.ConeGeometry(50, 100, 100);
+			//var geometry = new THREE.CylinderGeometry(50, 50, 100);
+			//var geometry = new THREE.PolyhedronGeometry
+			//var geometry = new THREE.TorusGeometry(100, 30, 16, 100);
+			//var geometry = new THREE.TorusKnotGeometry(100, 30, 16, 100);
+
+			var geometry = new THREE.BoxGeometry(100, 100, 100);
 			var mesh = new THREE.Mesh(geometry, material);
-			mesh.position.set(0, 0, -1000);
-	
+			mesh.position.z = -1000;
+			mesh.position.x = -100;
+			scene.add(mesh);
 
-			// var v1 = new THREE.Vector3();
-			// var v2 = new THREE.Vector3(1, 45, 6);
-			// var v3 = new THREE.Vector3(34, 34, 676);
+			var geometry2 = new THREE.SphereGeometry(50, 20, 20);
+			var mesh2 = new THREE.Mesh(geometry2, material);
+			mesh2.position.z = -1000;
+			mesh2.position.x = 100;
+			scene.add(mesh2);
 
-			// var vectors = [v1, v2, v3];
+			var geometry3 = new THREE.PlaneGeometry(10000, 10000, 100, 100);
+			var mesh3 = new THREE.Mesh(geometry3, material);
+			mesh3.rotation.x = -90 * Math.PI / 180;
+			mesh3.position.y = -100;
+			scene.add(mesh3);
 
-			// var path = new THREE.Path(vectors);
-
-			scene.add( mesh );
-
-			// camera.position.z = -1000;
-			// renderer.render(scene, camera);
 
 			var render = function () {
-				requestAnimationFrame( render );
-				//smaller the number, the slower it rotates
+		
 				mesh.rotation.x += .03;
 				mesh.rotation.y += .03;
 
