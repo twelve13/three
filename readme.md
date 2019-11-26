@@ -12,4 +12,4 @@ We have created an early animation prototype showcasing the features we plan to 
   * goes forward
   
 
-[See it in action here] (https://twelve13.github.io/three/)
+[See it in action here](https://twelve13.github.io/three/)
